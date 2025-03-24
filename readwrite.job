@@ -1,0 +1,50 @@
+[global]
+filesize=2G
+time_based=1
+startdelay=5
+exitall_on_error=1
+create_serialize=0
+filename_format=\$filenum/\$jobnum
+directory=/mnt/weka/fio-data
+group_reporting=1
+clocksource=gettimeofday
+runtime=15
+#ioengine=libaio
+disk_util=0
+direct=1
+
+[read-bandwidth-per-client]
+stonewall
+numjobs=12
+description='Sequential Read bandwidth workload'
+blocksize=1Mi
+rw=read
+iodepth=1
+ioengine=posixaio
+
+[write-bandwidth-per-client]
+stonewall
+numjobs=12
+description='Sequential Write bandwidth workload'
+blocksize=1Mi
+rw=write
+iodepth=1
+ioengine=posixaio
+
+[read-iops-per-client]
+stonewall
+numjobs=30
+description='Read iops workload'
+iodepth=8
+bs=4k
+rw=randread
+ioengine=libaio
+
+[write-iops-per-client]
+stonewall
+numjobs=20
+description='Write iops workload'
+iodepth=8
+bs=4k
+rw=randwrite
+ioengine=libaio
